@@ -1,0 +1,2 @@
+class QuranVerse < ApplicationRecord
+end
