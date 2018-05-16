@@ -1,0 +1,17 @@
+{
+  "name": "quranoverlay",
+  "engines": {
+    "node": "6.3.1"
+  },
+  "scripts": {
+    "build": "cd client && npm install && npm run build && cd ..",
+    "deploy": "cp -a client/build/. public/",
+    "postinstall": "npm run build && npm run deploy && echo 'Client built!'"
+  },
+  "dependencies": {
+    "node-sass": "^4.7.2",
+    "sass-loader": "^6.0.7",
+    "source-map-explorer": "^1.5.0",
+    "webpack": "^3.6.0"
+  }
+}
