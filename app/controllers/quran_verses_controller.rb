@@ -5,7 +5,7 @@ class QuranVersesController < ApplicationController
         if params[:verse_number] && params[:surah_number]
             @quran_verse = QuranVerse.where("verse_id = ? AND surah_id = ?", params[:verse_number].to_i, params[:surah_number].to_i)
             
-            @json_response = {STATUS: 'SUCCESS', verse: @quran_verse[0]}
+            @json_response = {STATUS: 'SUCCESS', verse: @quran_verse}
             render json: Oj.dump(@json_response, mode: :compat)
         elsif params[:surah_number]
             @surah_verses = QuranVerse.where("surah_id = ?", params[:surah_number].to_i).order("verse_id ASC")
