@@ -1,0 +1,79 @@
+.navbar {
+    display: flex;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+    background: #fff;
+    font-weight: 400;
+    border: 1px solid rgba(34,36,38,.15);
+    box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
+    min-height: 2.85714286em;
+    z-index: 5;
+}
+
+.navbar_left_options {
+    margin-right: auto;
+}
+
+.navbar_right_options {
+    margin-right: 10px;
+    margin-left: auto;
+    display: flex;
+    padding: 10px;
+}
+
+.navbar_settings {
+    margin: 0 5px;
+}
+
+.navbar_settings_icon {
+    font-size: 15px;
+}
+
+.settings_menu {
+    position: absolute;
+    width: auto;
+    min-height: 20vh;
+    height: auto;
+    min-width: max-content;
+    font-size: 1em;
+    text-shadow: none;
+    text-align: left;
+    box-shadow: rgba(34, 36, 38, 0.15) 0px 2px 3px 0px;
+    z-index: 11;
+    will-change: transform, opacity;
+    outline: 0px;
+    margin: 0px;
+    padding: 5px;
+    background: rgb(255, 255, 255);
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(34, 36, 38, 0.15);
+    border-image: initial;
+    border-radius: 0.285714rem;
+    margin-left: -200px;
+    overflow-y: auto;
+    max-height: 60vh;
+}
+
+.settings_menu_item {
+    margin: 5px 0;
+    display: flex;
+}
+
+.settings_menu_item_colour {
+    margin: 10px 5px;
+}
+
+.settings_menu_label {
+    margin: 10px 5px;
+}
+
+.settings_menu_font_styles {
+    margin: auto !important; 
+}
+
+.settings_menu_font_dropdown {
+    min-width: 10px !important;
+}
