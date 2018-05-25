@@ -9,6 +9,15 @@ export function grabVerse(surah_number, verse_number) {
     }
 }
 
+export function currentSearch(surah, verse) {
+    return function(dispatch) {
+        dispatch({type: "CURRENT_SEARCH", payload: {
+            surah: surah,
+            verse: verse
+        }})
+    }
+}
+
 export function searchForVerse(text) {
     return function(dispatch) {
 
