@@ -1,0 +1,23 @@
+.verse_container{
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    display: flex;
+    z-index: 1;
+}
+
+.verse {
+    margin: auto 15vw;
+    overflow-y: auto;
+    max-height: 30vh;
+    width: 100%;
+}
+
+#verse_arabic_name {
+    margin-bottom: 0
+}
+
+#verse_english_name {
+    font-style: italic;
+}

@@ -6,6 +6,9 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import registerServiceWorker from "./registerServiceWorker";
 
 import "./styles/index.css";
+import "./styles/App.css";
+import "./styles/Quran.css";
+import "./styles/Navbar.css";
 
 import store from "./store.js";
 
