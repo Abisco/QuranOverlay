@@ -32,7 +32,6 @@ class App extends Component {
     var current_verse = ""
     var current_surah = ""
     var self = this;
-    var search_verse_input = document.getElementById('search_verse_input').activeElement
 
     document.addEventListener("keydown", function(event) {
       if (! self.props.settings.search_input_focused) {
