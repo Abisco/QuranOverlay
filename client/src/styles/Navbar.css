@@ -77,3 +77,8 @@
 .settings_menu_font_dropdown {
     min-width: 10px !important;
 }
+
+.results {
+    max-height: 60vh !important;
+    overflow-y: auto !important;
+}
