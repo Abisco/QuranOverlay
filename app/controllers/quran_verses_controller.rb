@@ -13,7 +13,7 @@ class QuranVersesController < ApplicationController
             @json_response = {STATUS: 'SUCCESS', surah: @surah_verses}
             render json: Oj.dump(@json_response, mode: :compat)
         elsif params[:find_verse]
-            @verses = QuranVerse.where("arabic_ayah ILIKE ? OR shakir_ayah ILIKE ?", "%#{params[:find_verse]}%", "%#{params[:find_verse]}%").select("surah_id, verse_id, arabic_ayah, shakir_ayah").order("surah_id ASC")
+            @verses = QuranVerse.where("(arabic_ayah ILIKE ? OR shakir_ayah ILIKE ?) AND verse_id != 0", "%#{params[:find_verse]}%", "%#{params[:find_verse]}%").select("surah_id, verse_id, arabic_ayah, shakir_ayah").order("surah_id ASC")
 
             @json_response = {STATUS: 'SUCCESS', verses: @verses}
             render json: Oj.dump(@json_response, mode: :compat)

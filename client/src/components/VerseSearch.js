@@ -3,7 +3,9 @@ import { connect } from "react-redux";
 import { Menu, Dropdown, Icon, Input, Search } from "semantic-ui-react";
 import axios from 'axios';
 
-import { grabVerse } from "../actions/quranVersesActions"
+import { grabVerse } from "../actions/quranVersesActions";
+
+import { surahs_info } from "../helpers/quran_info";
 
 class VerseSearch extends Component {
     constructor(props) {
@@ -30,7 +32,8 @@ class VerseSearch extends Component {
 
             for (var i = 0; i < Math.min(10, response.data.verses.length); i++) {
                 var result = {}
-                result.title = response.data.verses[i].surah_id.toString() + ": " + response.data.verses[i].verse_id
+                result.title = surahs_info[response.data.verses[i].surah_id].arabic + ", Verse " + response.data.verses[i].verse_id.toString()
+                result.price = response.data.verses[i].surah_id.toString() + ": " + response.data.verses[i].verse_id.toString()
                 result.description = response.data.verses[i].shakir_ayah
                 result.surah_id = response.data.verses[i].surah_id
                 result.verse_id = response.data.verses[i].verse_id
