@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180506235540) do
+ActiveRecord::Schema.define(version: 20180526192923) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,9 @@ ActiveRecord::Schema.define(version: 20180506235540) do
     t.integer "verse_id"
     t.text "arabic_ayah"
     t.text "shakir_ayah"
+    t.string "surah_name_arabic"
+    t.string "surah_name_latin"
+    t.string "surah_name_english"
   end
 
 end
