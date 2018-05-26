@@ -26,13 +26,15 @@ class VerseSearch extends Component {
 
     searchText() {
         var self = this;
-        axios.get('/api/quran_verses?find_verse=' + document.getElementById('search_verse_input').value)
+        var search_input = document.getElementById('search_verse_input').value
+        //Grab search input, check if it's a number, surah name, or another type of text
+        axios.get('/api/quran_verses?find_verse=' + search_input)
         .then(function(response) {
             var search_results = []
 
             for (var i = 0; i < Math.min(10, response.data.verses.length); i++) {
                 var result = {}
-                result.title = surahs_info[response.data.verses[i].surah_id].arabic + ", Verse " + response.data.verses[i].verse_id.toString()
+                result.title = "Surah " + surahs_info[response.data.verses[i].surah_id].latin + ", Verse " + response.data.verses[i].verse_id.toString()
                 result.price = response.data.verses[i].surah_id.toString() + ": " + response.data.verses[i].verse_id.toString()
                 result.description = response.data.verses[i].shakir_ayah
                 result.surah_id = response.data.verses[i].surah_id
