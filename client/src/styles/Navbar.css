@@ -29,6 +29,12 @@
 
 .navbar_settings_icon {
     font-size: 15px;
+    color: black;
+}
+
+.navbar_settings_icon:hover {
+    cursor: pointer;
+    color: gray;
 }
 
 .settings_menu {
