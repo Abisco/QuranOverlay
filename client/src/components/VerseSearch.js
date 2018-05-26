@@ -32,7 +32,7 @@ class VerseSearch extends Component {
         .then(function(response) {
             var search_results = []
 
-            for (var i = 0; i < Math.min(10, response.data.verses.length); i++) {
+            for (var i = 0; i < response.data.verses.length; i++) {
                 var result = {}
                 result.title = "Surah " + surahs_info[response.data.verses[i].surah_id].latin + ", Verse " + response.data.verses[i].verse_id.toString()
                 result.price = response.data.verses[i].surah_id.toString() + ": " + response.data.verses[i].verse_id.toString()
