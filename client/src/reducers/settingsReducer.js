@@ -3,10 +3,10 @@ export default function settingsReducer(state = {
     show_settings: false,
     height: "30vh",
     background: "#000",
-    arabic_font: "30px",
+    arabic_font: "40px",
     show_arabic_font: true,
     arabic_color: "#fff",
-    english_font: "24px",
+    english_font: "34px",
     show_english_font: true,
     english_color: "#fff",
     show_english_name: true,
@@ -23,7 +23,7 @@ export default function settingsReducer(state = {
             search_input_focused: action.payload
         }
     }
-    
+
     case "SWITCH_NAVBAR" :{
         return state = {
             ...state,
