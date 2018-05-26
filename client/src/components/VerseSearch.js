@@ -24,6 +24,13 @@ class VerseSearch extends Component {
     componentDidMount() {
     }
 
+    //Taken from Stackoverflow
+    boldString(str, find){
+        var re = new RegExp(find, 'g');
+        return str.replace(re, '<b>'+find+'</b>');
+    }
+    
+
     searchText() {
         var self = this;
         var search_input = document.getElementById('search_verse_input').value
@@ -31,12 +38,19 @@ class VerseSearch extends Component {
         axios.get('/api/quran_verses?find_verse=' + search_input)
         .then(function(response) {
             var search_results = []
+            var result_text
 
             for (var i = 0; i < response.data.verses.length; i++) {
+                result_text = response.data.verses[i].shakir_ayah
+
+                if (response.data.verses[i].arabic_ayah.indexOf(search_input) !== -1) {
+                    result_text = response.data.verses[i].arabic_ayah
+                }
+
                 var result = {}
                 result.title = "Surah " + surahs_info[response.data.verses[i].surah_id].latin + ", Verse " + response.data.verses[i].verse_id.toString()
                 result.price = response.data.verses[i].surah_id.toString() + ": " + response.data.verses[i].verse_id.toString()
-                result.description = response.data.verses[i].shakir_ayah
+                result.description = result_text
                 result.surah_id = response.data.verses[i].surah_id
                 result.verse_id = response.data.verses[i].verse_id
                 search_results.push(result)
