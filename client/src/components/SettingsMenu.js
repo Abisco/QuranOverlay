@@ -5,7 +5,7 @@ import ColorPicker from 'rc-color-picker';
 import { font_sizes } from '../helpers/font_sizes';
 import 'rc-color-picker/assets/index.css';
 
-class settingsMenu extends Component {
+class SettingsMenu extends Component {
     constructor(props) {
         super(props);
 
@@ -167,7 +167,7 @@ class settingsMenu extends Component {
                                         <div className="settings_menu_label">
                                             Font Size:  
                                         </div>
-                                        <Dropdown placeholder='30' selection options={font_sizes} onChange={this.changeEnglishFontSize} id="arabic_font_size_dropdown" className="settings_menu_font_dropdown"/>
+                                        <Dropdown placeholder='24' selection options={font_sizes} onChange={this.changeEnglishFontSize} id="arabic_font_size_dropdown" className="settings_menu_font_dropdown"/>
                                     </div>
                                     <div className="settings_menu_item">
                                         <div className="settings_menu_label">
@@ -232,4 +232,4 @@ const mapStateToProps = store => ({
     settings: store.settings
 });
 
-export default connect(mapStateToProps)(settingsMenu);
+export default connect(mapStateToProps)(SettingsMenu);
