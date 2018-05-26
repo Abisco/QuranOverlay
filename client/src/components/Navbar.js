@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Menu, Dropdown, Icon, Input } from "semantic-ui-react";
 import ColorPicker from 'rc-color-picker';
 import SettingsMenu from './SettingsMenu';
+import VerseSearch from './VerseSearch';
 
 class Navbar extends Component {
     constructor(props) {
@@ -26,7 +27,7 @@ class Navbar extends Component {
         return (
             <div className="navbar" id="navbar">
                 <div className="navbar_left_options">
-                    <Input icon='search' placeholder='Search for a Verse' />
+                    <VerseSearch />
                 </div>
                 <div className="navbar_current_search">
                 </div>

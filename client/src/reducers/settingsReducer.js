@@ -13,9 +13,17 @@ export default function settingsReducer(state = {
     english_name_colour: "#fff",
     show_arabic_name: true,
     arabic_name_colour: "#fff",
-    background_image: ""    
+    background_image: "",
+    search_input_focused: false    
 }, action) {
   switch(action.type) {
+    case "SEARCH_INPUT_FOCUSED" :{
+        return state = {
+            ...state,
+            search_input_focused: action.payload
+        }
+    }
+    
     case "SWITCH_NAVBAR" :{
         return state = {
             ...state,
