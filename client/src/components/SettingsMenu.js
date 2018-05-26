@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { Input, Header, Icon, Button, Dropdown } from "semantic-ui-react";
+import { Input, Header, Icon, Button, Dropdown, Checkbox } from "semantic-ui-react";
 import ColorPicker from 'rc-color-picker';
 import { font_sizes } from '../helpers/font_sizes';
 import 'rc-color-picker/assets/index.css';
@@ -84,6 +84,38 @@ class SettingsMenu extends Component {
         document.getElementById("verse_arabic_name").style.fontSize = value.value;
     }
 
+    toggleArabic(e, value) {
+        if (value.checked) {
+            document.getElementById("verse_arabic_ayah").style.display = "block"
+        } else {
+            document.getElementById("verse_arabic_ayah").style.display = "none"
+        }
+    }
+
+    toggleEnglish(e, value) {
+        if (value.checked) {
+            document.getElementById("verse_english_ayah").style.display = "block"
+        } else {
+            document.getElementById("verse_english_ayah").style.display = "none"
+        }
+    }
+
+    toggleArabicSurahName(e, value) {
+        if (value.checked) {
+            document.getElementById("verse_arabic_name").style.display = "block"
+        } else {
+            document.getElementById("verse_arabic_name").style.display = "none"
+        }
+    }
+
+    toggleEnglishSurahName(e, value) {
+        if (value.checked) {
+            document.getElementById("verse_english_name").style.display = "block"
+        } else {
+            document.getElementById("verse_english_name").style.display = "none"
+        }
+    }
+
     toggleSettings() {
         this.props.dispatch({type: "TOGGLE_SETTINGS", payload: !this.props.settings.show_settings})
     }
@@ -133,17 +165,7 @@ class SettingsMenu extends Component {
                                     </div>
                                 <Header size='tiny' dividing>Arabic</Header>
                                     <div className="settings_menu_item">
-                                        <Button.Group className="settings_menu_font_styles">
-                                            <Button icon>
-                                                <Icon name='bold' />
-                                            </Button>
-                                            <Button icon>
-                                                <Icon name='underline' />
-                                            </Button>
-                                            <Button icon>
-                                                <Icon name='italic' />
-                                            </Button>
-                                        </Button.Group>
+                                        <Checkbox label='Show Arabic' defaultChecked onChange={this.toggleArabic}/>
                                     </div>
                                     <div className="settings_menu_item">
                                         <div className="settings_menu_label">
@@ -162,7 +184,23 @@ class SettingsMenu extends Component {
                                             className="settings_menu_item_colour"
                                         />
                                     </div>
+                                    <div className="settings_menu_item">
+                                        <Button.Group className="settings_menu_font_styles">
+                                            <Button icon>
+                                                <Icon name='bold' />
+                                            </Button>
+                                            <Button icon>
+                                                <Icon name='underline' />
+                                            </Button>
+                                            <Button icon>
+                                                <Icon name='italic' />
+                                            </Button>
+                                        </Button.Group>
+                                    </div>
                                 <Header size='tiny' dividing>English</Header>
+                                    <div className="settings_menu_item">
+                                        <Checkbox label='Show English' defaultChecked onChange={this.toggleEnglish}/>
+                                    </div>
                                     <div className="settings_menu_item">
                                         <div className="settings_menu_label">
                                             Font Size:  
@@ -180,7 +218,23 @@ class SettingsMenu extends Component {
                                             className="settings_menu_item_colour"
                                         />
                                     </div>
+                                    <div className="settings_menu_item">
+                                        <Button.Group className="settings_menu_font_styles">
+                                            <Button icon>
+                                                <Icon name='bold' />
+                                            </Button>
+                                            <Button icon>
+                                                <Icon name='underline' />
+                                            </Button>
+                                            <Button icon>
+                                                <Icon name='italic' />
+                                            </Button>
+                                        </Button.Group>
+                                    </div>
                                 <Header size='tiny' dividing>Info</Header>
+                                    <div className="settings_menu_item">
+                                        <Checkbox label='Show Arabic Surah Name' defaultChecked onChange={this.toggleArabicSurahName}/>
+                                    </div>
                                     <div className="settings_menu_item">
                                         <div className="settings_menu_label">
                                             Arabic Surah Name Size:  
@@ -199,6 +253,22 @@ class SettingsMenu extends Component {
                                         />
                                     </div>
                                     <div className="settings_menu_item">
+                                        <Button.Group className="settings_menu_font_styles">
+                                            <Button icon>
+                                                <Icon name='bold' />
+                                            </Button>
+                                            <Button icon>
+                                                <Icon name='underline' />
+                                            </Button>
+                                            <Button icon>
+                                                <Icon name='italic' />
+                                            </Button>
+                                        </Button.Group>
+                                    </div>
+                                    <div className="settings_menu_item">
+                                        <Checkbox label='Show English Surah Name' defaultChecked onChange={this.toggleEnglishSurahName}/>
+                                    </div>
+                                    <div className="settings_menu_item">
                                         <div className="settings_menu_label">
                                             English Surah Name Size:  
                                         </div>
@@ -214,6 +284,19 @@ class SettingsMenu extends Component {
                                             onChange={this.changeEnglishSurahColour}
                                             className="settings_menu_item_colour"
                                         />
+                                    </div>
+                                    <div className="settings_menu_item">
+                                        <Button.Group className="settings_menu_font_styles">
+                                            <Button icon>
+                                                <Icon name='bold' />
+                                            </Button>
+                                            <Button icon>
+                                                <Icon name='underline' />
+                                            </Button>
+                                            <Button icon>
+                                                <Icon name='italic' />
+                                            </Button>
+                                        </Button.Group>
                                     </div>
                             </div>
         }
