@@ -14,6 +14,14 @@
     width: 100%;
 }
 
+#verse_arabic_ayah {
+    margin-bottom: 5px;
+}
+
+#verse_english_ayah {
+    margin-bottom: 5px;
+}
+
 #verse_arabic_name {
     margin-bottom: 0
 }
