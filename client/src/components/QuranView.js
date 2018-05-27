@@ -26,21 +26,14 @@ class QuranView extends Component {
 	}
 
 	render() {
-		var english_name = ""
-		var arabic_name = ""
-		if (surahs_info[this.props.quran_verses.verses[0].surah_id]) {
-			english_name = surahs_info[this.props.quran_verses.verses[0].surah_id].english
-			arabic_name = surahs_info[this.props.quran_verses.verses[0].surah_id].arabic
-		}
-	
 		return (
 			<div className="verse_container" id="verse_container">
-			<div className="verse" id="verse">
-				<p id="verse_arabic_name">{arabic_name}</p>
-				<p id="verse_english_name">{english_name}</p>
-				<p id="verse_arabic_ayah">{this.props.quran_verses.verses[0].arabic_ayah} </p>
-				<p id="verse_english_ayah">{this.props.quran_verses.verses[0].shakir_ayah} ({this.props.quran_verses.verses[0].verse_id})</p>
-			</div>
+				<div className="verse" id="verse">
+					<p id="verse_arabic_name">Surah {this.props.quran_verses.verses[0].surah_name_latin}</p>
+					<p id="verse_english_name">{this.props.quran_verses.verses[0].surah_name_english}</p>
+					<p id="verse_arabic_ayah">{this.props.quran_verses.verses[0].arabic_ayah} </p>
+					<p id="verse_english_ayah">{this.props.quran_verses.verses[0].shakir_ayah} ({this.props.quran_verses.verses[0].verse_id})</p>
+				</div>
 			</div>
 		);
 	}
