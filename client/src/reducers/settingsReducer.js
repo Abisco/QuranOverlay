@@ -1,9 +1,9 @@
 export default function settingsReducer(state = {
     show_navbar: true,
     show_settings: false,
-    height: "30vh",
+    height: "33vh",
     background: "#000",
-    arabic_font: "40px",
+    arabic_font: "50px",
     show_arabic_font: true,
     arabic_color: "#fff",
     english_font: "34px",
