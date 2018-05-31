@@ -22,5 +22,5 @@ The settings area in the top right corner can be opened and closed by clicking o
 * Backspace: Delete current quick verse lookup
 * Left Arrow: Display previous verse
 * Right Arrow or Spacebar: Display next verse
-* / or ?: Hide the navbar
+* ?: Toggle the navbar
 * Colon or Semi colon: Following entering a Surah number, the colon or semi colon key will switch the search to a verse look up
