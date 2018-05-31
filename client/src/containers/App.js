@@ -9,22 +9,120 @@ import { grabVerse, currentSearch } from "../actions/quranVersesActions"
 
 import { surahs_info } from "../helpers/quran_info";
 
+var Mousetrap = window.Mousetrap
+
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.checkKeyStrokes = this.checkKeyStrokes.bind(this);
     this.setDefaultSettings = this.setDefaultSettings.bind(this);
-    this.hideSettings = this.hideSettings.bind(this);
+
+    //Keybinding helpers
+    this._toggleNavbar = this._toggleNavbar.bind(this);
+    this._toggleArabic = this._toggleArabic.bind(this);
+    this._toggleEnglish = this._toggleEnglish.bind(this);
+    this._toggleSurahName = this._toggleSurahName.bind(this);
+    this._focusSearch = this._focusSearch.bind(this);
+    this._increaseArabicFont = this._increaseArabicFont.bind(this);
+    this._decreaseArabicFont = this._decreaseArabicFont.bind(this);
+    this._increaseEnglishFont = this._increaseEnglishFont.bind(this);
+    this._decreaseEnglishFont = this._decreaseEnglishFont.bind(this);
+    this._nextVerse = this._nextVerse.bind(this);
+    this._previousVerse = this._previousVerse.bind(this);
 
     this.state = {
-      hide_menu: false
     };
   }
 
   componentDidMount() {
+    //Setup hotkeys for quick nav and settings
+    Mousetrap.bind('?', this._toggleNavbar);
+    Mousetrap.bind('shift+q', this._toggleArabic);
+    Mousetrap.bind('shift+e', this._toggleEnglish);
+    Mousetrap.bind('shift+i', this._toggleSurahName);
+    Mousetrap.bind('shift+s', this._focusSearch)
+    Mousetrap.bind('alt+q', this._increaseArabicFont);
+    Mousetrap.bind('alt+w', this._decreaseArabicFont);
+    Mousetrap.bind('alt+e', this._increaseEnglishFont);
+    Mousetrap.bind('alt+r', this._decreaseEnglishFont);
+    Mousetrap.bind('right', this._nextVerse);
+    Mousetrap.bind('space', this._nextVerse);
+    Mousetrap.bind('left', this._previousVerse);
+
     this.checkKeyStrokes()
     this.setDefaultSettings();
+  }
+
+  _toggleNavbar() {
+    if (this.props.settings.show_navbar) {
+      document.getElementById("navbar").style.display = "none";
+    } else {
+      document.getElementById("navbar").style.display = "flex";
+    }
+
+    this.props.dispatch({type: "SWITCH_NAVBAR", payload: !this.props.settings.show_navbar})
+  }
+
+  _toggleArabic() {
+    if (this.props.settings.show_arabic_font) {
+      document.getElementById("verse_arabic_ayah").style.display = "none"
+    } else {
+      document.getElementById("verse_arabic_ayah").style.display = "block"
+    }
+
+    this.props.dispatch({type: "TOGGLE_ARABIC", payload: !this.props.settings.show_arabic_font})
+  }
+
+  _toggleEnglish() {
+    if (this.props.settings.show_english_font) {
+      document.getElementById("verse_english_ayah").style.display = "none"
+    } else {
+      document.getElementById("verse_english_ayah").style.display = "block"
+    }
+
+    this.props.dispatch({type: "TOGGLE_ENGLISH", payload: !this.props.settings.show_english_font})
+  }
+
+  _toggleSurahName() {
+    if (this.props.settings.show_arabic_name || this.props.settings.show_english_name) {
+      
+    } else {
+
+    }
+  } 
+
+  _focusSearch() {
+    console.log('FOCUS SEARCH')
+  }
+
+  _increaseArabicFont() {
+    document.getElementById("verse_arabic_ayah").style.fontSize = (this.props.settings.arabic_font_size + 2).toString() + "px";
+    this.props.dispatch({type: "CHANGE_ARABIC_SIZE", payload: this.props.settings.arabic_font_size + 2})
+  }
+
+  _decreaseArabicFont() {
+    document.getElementById("verse_arabic_ayah").style.fontSize = (this.props.settings.arabic_font_size - 2).toString() + "px";
+    this.props.dispatch({type: "CHANGE_ARABIC_SIZE", payload: this.props.settings.arabic_font_size - 2})
+  }
+
+  _increaseEnglishFont() {
+    console.log('increase')
+    document.getElementById("verse_english_ayah").style.fontSize = (this.props.settings.english_font_size + 2).toString() + "px";
+    this.props.dispatch({type: "CHANGE_ENGLISH_SIZE", payload: this.props.settings.english_font_size + 2})
+  }
+
+  _decreaseEnglishFont() {
+    document.getElementById("verse_english_ayah").style.fontSize = (this.props.settings.english_font_size - 2).toString() + "px";
+    this.props.dispatch({type: "CHANGE_ENGLISH_SIZE", payload: this.props.settings.english_font_size - 2})
+  }
+
+  _nextVerse() {
+    console.log('NEXT VERSE')
+  }
+
+  _previousVerse() {
+    console.log('PREVIOUS VERSE')
   }
 
   checkKeyStrokes() {
@@ -51,15 +149,6 @@ class App extends Component {
         } else if (event.keyCode === 58 || event.keyCode === 186 || event.keyCode === 16) {
           //Colon, switch from surah to verse
           type = "VERSE"
-        } else if (event.keyCode === 191) {
-          //Pressed ? key, hide or show the navbar
-          if (self.props.settings.show_navbar) {
-            document.getElementById("navbar").style.display = "none";
-          } else {
-            document.getElementById("navbar").style.display = "flex";
-          }
-          
-          self.props.dispatch({type: "SWITCH_NAVBAR", payload: !self.props.settings.show_navbar})
         } else if (event.keyCode === 32 || event.keyCode === 39) {
           //Space bar or Right arrow
           if (current_verse === "" || current_surah === "") {
@@ -115,26 +204,23 @@ class App extends Component {
     })
   }
 
-  hideSettings() {
-    this.props.dispatch({type: "TOGGLE_SETTINGS", payload: false})
-  }
-
   setDefaultSettings() {
     document.getElementById("verse_container").style.backgroundColor = this.props.settings.background;
     document.getElementById("verse_container").style.height = this.props.settings.height;
-    document.getElementById("verse_arabic_ayah").style.fontSize = this.props.settings.arabic_font;
-    document.getElementById("verse_arabic_ayah").style.color = this.props.settings.arabic_color;
-    document.getElementById("verse_english_ayah").style.fontSize = this.props.settings.english_font;
-    document.getElementById("verse_english_ayah").style.color = this.props.settings.english_color;
-    document.getElementById("verse_arabic_name").style.color = this.props.settings.english_name_colour
-    document.getElementById("verse_english_name").style.color = this.props.settings.arabic_name_colour
+    document.getElementById("verse_arabic_ayah").style.fontSize = this.props.settings.arabic_font_size.toString() + "px";
+    document.getElementById("verse_arabic_ayah").style.color = this.props.settings.arabic_colour;
+    document.getElementById("verse_english_ayah").style.fontSize = this.props.settings.english_font_size.toString() + "px";
+    document.getElementById("verse_english_ayah").style.color = this.props.settings.english_colour;
+    document.getElementById("verse_info").style.color = this.props.settings.english_name_colour;
+    //document.getElementById("verse_arabic_name").style.color = this.props.settings.english_name_colour
+    //document.getElementById("verse_english_name").style.color = this.props.settings.arabic_name_colour
   }
 
   render() {
     return (
       <div className="App">
         <Navbar />
-        <div id="quran_view_container" className="quran_view_container" onClick={this.hideSettings}>
+        <div id="quran_view_container" className="quran_view_container">
           <QuranView />
         </div>
       </div>

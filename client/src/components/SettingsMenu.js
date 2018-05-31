@@ -90,6 +90,8 @@ class SettingsMenu extends Component {
         } else {
             document.getElementById("verse_arabic_ayah").style.display = "none"
         }
+
+
     }
 
     toggleEnglish(e, value) {
@@ -141,7 +143,7 @@ class SettingsMenu extends Component {
                                         </div>
                                         <ColorPicker
                                             animation="slide-up"
-                                            color={'#000'}
+                                            color={this.props.settings.background}
                                             onChange={this.changeBackgroundColour}
                                             className="settings_menu_item_colour"
                                         />
@@ -150,7 +152,7 @@ class SettingsMenu extends Component {
                                         <div className="settings_menu_label">
                                             All Font Sizes:  
                                         </div>
-                                        <Dropdown placeholder='30' selection options={font_sizes} onChange={this.changeAllFontSize} id="arabic_font_size_dropdown" className="settings_menu_font_dropdown"/>
+                                        <Dropdown placeholder="30" selection options={font_sizes} onChange={this.changeAllFontSize} id="arabic_font_size_dropdown" className="settings_menu_font_dropdown"/>
                                     </div>
                                     <div className="settings_menu_item">
                                         <div className="settings_menu_label">
@@ -158,7 +160,7 @@ class SettingsMenu extends Component {
                                         </div>
                                         <ColorPicker
                                             animation="slide-up"
-                                            color={'#000'}
+                                            color={'#fff'}
                                             onChange={this.changeAllFontColours}
                                             className="settings_menu_item_colour"
                                         />
