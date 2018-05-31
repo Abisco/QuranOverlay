@@ -29,3 +29,20 @@
 #verse_english_name {
     font-style: italic;
 }
+
+.verse_info {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    max-width: 5vw;
+}
+
+.verse_circle {
+    display: inline-block;
+    border-radius: 50%;
+    border: 1px solid #fff;
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
+    margin: 5px;
+}
