@@ -34,7 +34,7 @@ class QuranView extends Component {
 					{this.props.quran_verses.verses[0].surah_id}: {this.props.quran_verses.verses[0].verse_id}
 				</div>
 				<div className="verse" id="verse">
-					<p id="verse_arabic_ayah">{this.props.quran_verses.verses[0].arabic_ayah}</p>
+					<p id="verse_arabic_ayah">{this.props.quran_verses.verses[0].arabic_ayah} <div className="verse_circle">{this.convertEnglishToArabic(this.props.quran_verses.verses[0].verse_id.toString())}</div></p>
 					<p id="verse_english_ayah">{this.props.quran_verses.verses[0].shakir_ayah} ({this.props.quran_verses.verses[0].verse_id})</p>
 				</div>
 				
