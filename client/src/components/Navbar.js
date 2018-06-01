@@ -20,18 +20,26 @@ class Navbar extends Component {
 
 
     render() {
-        // Options to:
-        // Change arabic and english fonts and colours
-        // Change background colour
-        // Change extra font size and colour
+        var current_search = <div />
+        if (this.props.quran_verses.surah_search && this.props.quran_verses.surah_search !== "") {
+            current_search = <div className="navbar_current_search">Current Search: {this.props.quran_verses.surah_search}:{this.props.quran_verses.verse_search}</div>
+        }
         return (
             <div className="navbar" id="navbar">
                 <div className="navbar_left_options">
                     <VerseSearch />
                 </div>
-                <div className="navbar_current_search">
-                </div>
+                {current_search}
                 <div className="navbar_right_options">
+                    <Dropdown item icon='question' simple direction='left'>
+                        <Dropdown.Menu>
+                            <Dropdown.Item className="keyboard_item">
+                                <div>
+                                    About us will be here
+                                </div>
+                            </Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
                     <Dropdown item icon='keyboard' simple direction='left'>
                         <Dropdown.Menu>
                             <Dropdown.Item className="keyboard_item">

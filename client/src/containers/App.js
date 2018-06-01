@@ -28,8 +28,6 @@ class App extends Component {
     this._decreaseArabicFont = this._decreaseArabicFont.bind(this);
     this._increaseEnglishFont = this._increaseEnglishFont.bind(this);
     this._decreaseEnglishFont = this._decreaseEnglishFont.bind(this);
-    this._nextVerse = this._nextVerse.bind(this);
-    this._previousVerse = this._previousVerse.bind(this);
 
     this.state = {
     };
@@ -46,9 +44,6 @@ class App extends Component {
     Mousetrap.bind('alt+w', this._decreaseArabicFont);
     Mousetrap.bind('alt+e', this._increaseEnglishFont);
     Mousetrap.bind('alt+r', this._decreaseEnglishFont);
-    Mousetrap.bind('right', this._nextVerse);
-    Mousetrap.bind('space', this._nextVerse);
-    Mousetrap.bind('left', this._previousVerse);
 
     this.checkKeyStrokes()
     this.setDefaultSettings();
@@ -107,7 +102,6 @@ class App extends Component {
   }
 
   _increaseEnglishFont() {
-    console.log('increase')
     document.getElementById("verse_english_ayah").style.fontSize = (this.props.settings.english_font_size + 2).toString() + "px";
     this.props.dispatch({type: "CHANGE_ENGLISH_SIZE", payload: this.props.settings.english_font_size + 2})
   }
@@ -115,14 +109,6 @@ class App extends Component {
   _decreaseEnglishFont() {
     document.getElementById("verse_english_ayah").style.fontSize = (this.props.settings.english_font_size - 2).toString() + "px";
     this.props.dispatch({type: "CHANGE_ENGLISH_SIZE", payload: this.props.settings.english_font_size - 2})
-  }
-
-  _nextVerse() {
-    console.log('NEXT VERSE')
-  }
-
-  _previousVerse() {
-    console.log('PREVIOUS VERSE')
   }
 
   checkKeyStrokes() {
@@ -193,6 +179,7 @@ class App extends Component {
           type = "SURAH"
           current_verse = ""
           current_surah = ""
+          self.props.dispatch(currentSearch(current_surah, current_verse))
         } else if (type === "VERSE") {
           current_verse += String.fromCharCode(event.keyCode)
           self.props.dispatch(currentSearch(current_surah, current_verse))

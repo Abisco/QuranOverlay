@@ -13,11 +13,13 @@ class VerseSearch extends Component {
 
         this.searchText = this.searchText.bind(this);
         this.selectVerse = this.selectVerse.bind(this);
+        this.selectType = this.selectType.bind(this);
 
         this.state = {
             isLoading: false,
             results: [],
-            value: ''
+            value: '',
+            type: 'Quran'
         };
     }
 
@@ -31,35 +33,39 @@ class VerseSearch extends Component {
     }
     
 
-    searchText() {
+    searchText(e, value) {
         var self = this;
-        var search_input = document.getElementById('search_verse_input').value
-        //Grab search input, check if it's a number, surah name, or another type of text
-        axios.get('/api/quran_verses?find_verse=' + search_input)
-        .then(function(response) {
-            var search_results = []
-            var result_text
+        var search_input = value.value
 
-            for (var i = 0; i < response.data.verses.length; i++) {
-                result_text = response.data.verses[i].shakir_ayah
-
-                if (response.data.verses[i].arabic_ayah.indexOf(search_input) !== -1) {
-                    result_text = response.data.verses[i].arabic_ayah
+        if (this.state.type === "Quran") {
+            axios.get('/api/quran_verses?find_verse=' + search_input)
+            .then(function(response) {
+                var search_results = []
+                var result_text
+    
+                for (var i = 0; i < response.data.verses.length; i++) {
+                    result_text = response.data.verses[i].shakir_ayah
+    
+                    if (response.data.verses[i].arabic_ayah.indexOf(search_input) !== -1) {
+                        result_text = response.data.verses[i].arabic_ayah
+                    }
+    
+                    var result = {}
+                    result.title = "Surah " + surahs_info[response.data.verses[i].surah_id].latin + ", Verse " + response.data.verses[i].verse_id.toString()
+                    result.price = response.data.verses[i].surah_id.toString() + ": " + response.data.verses[i].verse_id.toString()
+                    result.description = result_text
+                    result.surah_id = response.data.verses[i].surah_id
+                    result.verse_id = response.data.verses[i].verse_id
+                    search_results.push(result)
                 }
-
-                var result = {}
-                result.title = "Surah " + surahs_info[response.data.verses[i].surah_id].latin + ", Verse " + response.data.verses[i].verse_id.toString()
-                result.price = response.data.verses[i].surah_id.toString() + ": " + response.data.verses[i].verse_id.toString()
-                result.description = result_text
-                result.surah_id = response.data.verses[i].surah_id
-                result.verse_id = response.data.verses[i].verse_id
-                search_results.push(result)
-            }
-
-            self.setState({
-                results: search_results
+    
+                self.setState({
+                    results: search_results
+                })
             })
-        })
+        } else {
+        }
+
     }
 
     focused() {
@@ -74,19 +80,31 @@ class VerseSearch extends Component {
         this.props.dispatch(grabVerse(result.surah_id, result.verse_id));
     }
 
+    selectType(e, data) {
+        console.log(data.value)
+        this.setState({
+            type: data.value
+        })
+    }
+
     render() {
         return (
-            <Search
-                loading={this.state.isLoading}
-                onSearchChange={this.searchText}
-                results={this.state.results}
-                placeholder='Search for a Verse'
-                onFocus={this.focused.bind(this)} 
-                onBlur={this.blurred.bind(this)}
-                id="search_verse_input"
-                minCharacters={3}
-                onResultSelect={this.selectVerse}
-            />
+            <div className="search_bar">
+                <Search
+                    loading={this.state.isLoading}
+                    onSearchChange={this.searchText}
+                    results={this.state.results}
+                    placeholder='Search for a Verse'
+                    onFocus={this.focused.bind(this)} 
+                    onBlur={this.blurred.bind(this)}
+                    id="search_verse_input"
+                    className="search_verse_input"
+                    minCharacters={3}
+                    onResultSelect={this.selectVerse}
+                />
+                <Dropdown selection defaultValue='Quran' onChange={this.selectType} options={[{text: 'Quran', value: 'Quran'}, {text: 'Hadiths', value: 'Hadiths'}]} className="search_verse_type"/>
+            </div>
+
         );
     }
 }

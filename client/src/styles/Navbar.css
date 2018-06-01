@@ -88,3 +88,23 @@
     max-height: 60vh !important;
     overflow-y: auto !important;
 }
+
+.search_bar {
+    display: flex;
+}
+
+.navbar_current_search {
+    margin: auto;
+    text-transform: uppercase;
+}
+
+#search_verse_input {
+    border-right: none !important;
+    border-radius: 0.285714rem !important;
+}
+
+.search_verse_type {
+    min-width: 0 !important;
+    border-left: none !important;
+    margin-left: -5px;
+}
