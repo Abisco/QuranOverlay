@@ -53,7 +53,7 @@ class QuranView extends Component {
 							{this.props.quran_verses.hadith.source}
 						</div>
 						<div className="verse_info verse_info_right">
-							Provided by A.L.I's Hadith Database
+							Powered by A.L.I's Hadith Database
 						</div>
 					</div>
 					<div className="verse" id="verse">
