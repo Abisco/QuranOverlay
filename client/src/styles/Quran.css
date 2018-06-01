@@ -32,9 +32,17 @@
 
 .verse_info {
     position: absolute;
-    bottom: 10px;
-    left: 0;
     max-width: 5vw;
+}
+
+.verse_info_left {
+    bottom: 10px;
+    left: 10px;
+}
+
+.verse_info_right {
+    bottom: 10px;
+    right: 10px;
 }
 
 .verse_circle {
