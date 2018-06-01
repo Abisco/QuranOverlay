@@ -4,7 +4,7 @@ export default function quranVersesReducer(state = {
     hadith: {"book": "Mizan Al-Hikmah", "number":"804", "part":"<span class=\"highlight\">COURAGE</span> الشَّجاعَة", "section":"<span class=\"highlight\">Courage</span>", "tags":[], "arabic" :"الإمامُ الحسنُ (عَلَيهِ الّسَلامُ) ـ وقد سُئلَ عنِ‏الشَّجاعةِ ـ: مُواقَفَةُ الأقرانِ ، والصَّبرُ عِندَ الطِّعانِ.", "english": "Imam al-Hasan (AS) was once asked about <span class=\"highlight\">courage</span>, to which he replied, 'It is to know when to stand up to one's opponents, and when to be patient in the face of criticism.", "source":"Tuhaf al-Uqoul, number:226","gradings":[],"related":[],"publisher":"ICAS Press","history":["This hadith was first loaded on Fri Jun 01 04:58:14 UTC 2018"],"_id":"AV8-AkBqiLJ1Hru3mlNf"},
     verse_search: null,
     surah_search: null,
-    type: "Hadith"
+    type: "Quran"
 }, action) {
   switch(action.type) {
     case "SET_VERSES" :{
