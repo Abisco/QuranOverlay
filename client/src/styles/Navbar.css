@@ -108,3 +108,9 @@
     border-left: none !important;
     margin-left: -5px;
 }
+
+.search_input_result {
+    font-weight: bolder;
+    color: black;
+    display: inline;
+}

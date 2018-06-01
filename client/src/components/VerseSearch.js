@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { Menu, Dropdown, Icon, Input, Search } from "semantic-ui-react";
 import axios from 'axios';
+import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 
 import { grabVerse } from "../actions/quranVersesActions";
 
@@ -50,14 +51,12 @@ class VerseSearch extends Component {
                         result_text = response.data.verses[i].arabic_ayah
                     }
 
-                    var result_array_text = result_text.split(" ")
-                    var result_index = result_array_text.indexOf(search_input)
-                    var result_truncated = result_array_text
+                    result_text = result_text.replace(search_input, "<div class='search_input_result'>" + search_input + "</div>")
     
                     var result = {}
                     result.title = "Surah " + surahs_info[response.data.verses[i].surah_id].latin + ", Verse " + response.data.verses[i].verse_id.toString()
                     result.price = response.data.verses[i].surah_id.toString() + ": " + response.data.verses[i].verse_id.toString()
-                    result.description = result_text
+                    result.description = <div>{ReactHtmlParser(result_text)}</div>
                     result.surah_id = response.data.verses[i].surah_id
                     result.verse_id = response.data.verses[i].verse_id
                     search_results.push(result)
@@ -78,11 +77,13 @@ class VerseSearch extends Component {
                     if (response.data.collection[i].arabic.indexOf(search_input) !== -1) {
                         result_text = response.data.collection[i].arabic
                     }
+                    
+                    result_text = result_text.replace(search_input, "<div class='search_input_result'>" + search_input + "</div>")
 
                     var result = {}
                     result.title = response.data.collection[i].source
                     result.price = response.data.collection[i].number
-                    result.description = result_text
+                    result.description = <div>{ReactHtmlParser(result_text)}</div>
                     result.english = response.data.collection[i].english
                     result.arabic = response.data.collection[i].arabic
                     response.book = response.data.collection[i].book

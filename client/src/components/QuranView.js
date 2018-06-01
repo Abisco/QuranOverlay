@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { } from "semantic-ui-react";
+import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 
 import { grabVerse } from "../actions/quranVersesActions"
 
@@ -58,7 +59,7 @@ class QuranView extends Component {
 					</div>
 					<div className="verse" id="verse">
 						<p id="verse_arabic_ayah">{this.props.quran_verses.hadith.arabic} </p>
-						<p id="verse_english_ayah">{this.props.quran_verses.hadith.english}</p>
+						<p id="verse_english_ayah">{ReactHtmlParser(this.props.quran_verses.hadith.english)}</p>
 					</div>
 					
 				</div>
