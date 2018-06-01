@@ -180,13 +180,15 @@ class App extends Component {
           current_verse = ""
           current_surah = ""
           self.props.dispatch(currentSearch(current_surah, current_verse))
-        } else if (type === "VERSE") {
-          current_verse += String.fromCharCode(event.keyCode)
-          self.props.dispatch(currentSearch(current_surah, current_verse))
-        } else if (type === "SURAH") {
-          current_surah += String.fromCharCode(event.keyCode)
-          self.props.dispatch(currentSearch(current_surah, current_verse))
-        }
+        } else if ((event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)) {
+          if (type === "VERSE") {
+            current_verse += String.fromCharCode(event.keyCode)
+            self.props.dispatch(currentSearch(current_surah, current_verse))
+          } else if (type === "SURAH") {
+            current_surah += String.fromCharCode(event.keyCode)
+            self.props.dispatch(currentSearch(current_surah, current_verse))
+          }
+        } 
       }
     })
   }
@@ -198,7 +200,8 @@ class App extends Component {
     document.getElementById("verse_arabic_ayah").style.color = this.props.settings.arabic_colour;
     document.getElementById("verse_english_ayah").style.fontSize = this.props.settings.english_font_size.toString() + "px";
     document.getElementById("verse_english_ayah").style.color = this.props.settings.english_colour;
-    document.getElementById("verse_info").style.color = this.props.settings.english_name_colour;
+    document.getElementById("verse_info").style.color = this.props.settings.quran_info_colour;
+    document.getElementById("verse_info").style.fontSize = this.props.settings.quran_info_size.toString() + "px";
     //document.getElementById("verse_arabic_name").style.color = this.props.settings.english_name_colour
     //document.getElementById("verse_english_name").style.color = this.props.settings.arabic_name_colour
   }

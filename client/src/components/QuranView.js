@@ -18,7 +18,7 @@ class QuranView extends Component {
 	}
 	
 	convertEnglishToArabic(number) {
-		var id= ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹']
+		var id= ['۰','۱','۲','۳','٤','۵','٦','۷','۸','۹']
 		
 		return number.replace(/[0-9]/g, function(w){
 			return id[+w]
@@ -30,8 +30,13 @@ class QuranView extends Component {
 
 		return (
 			<div className="verse_container" id="verse_container">
-				<div className="verse_info" id="verse_info">
-					{this.props.quran_verses.verses[0].surah_id}: {this.props.quran_verses.verses[0].verse_id}
+				<div id="verse_info">
+					<div className="verse_info verse_info_left">
+						{this.props.quran_verses.verses[0].surah_id}: {this.props.quran_verses.verses[0].verse_id}
+					</div>
+					<div className="verse_info verse_info_right">
+						Surah {this.props.quran_verses.verses[0].surah_name_latin}
+					</div>
 				</div>
 				<div className="verse" id="verse">
 					<p id="verse_arabic_ayah">{this.props.quran_verses.verses[0].arabic_ayah} <div className="verse_circle">{this.convertEnglishToArabic(this.props.quran_verses.verses[0].verse_id.toString())}</div></p>
