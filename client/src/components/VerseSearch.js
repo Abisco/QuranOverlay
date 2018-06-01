@@ -49,6 +49,10 @@ class VerseSearch extends Component {
                     if (response.data.verses[i].arabic_ayah.indexOf(search_input) !== -1) {
                         result_text = response.data.verses[i].arabic_ayah
                     }
+
+                    var result_array_text = result_text.split(" ")
+                    var result_index = result_array_text.indexOf(search_input)
+                    var result_truncated = result_array_text
     
                     var result = {}
                     result.title = "Surah " + surahs_info[response.data.verses[i].surah_id].latin + ", Verse " + response.data.verses[i].verse_id.toString()
@@ -64,6 +68,31 @@ class VerseSearch extends Component {
                 })
             })
         } else {
+            axios.get('https://hadith.academyofislam.com/v1/narrations?q=' + search_input + '&page=0')
+            .then(function(response) {
+                var search_results = []
+                var result_text = response.data.collection[i].english
+
+                for (var i = 0; i < response.data.collection.length; i++) {
+                    result_text = response.data.collection[i].english
+                    if (response.data.collection[i].arabic.indexOf(search_input) !== -1) {
+                        result_text = response.data.collection[i].arabic
+                    }
+
+                    var result = {}
+                    result.title = response.data.collection[i].source
+                    result.price = response.data.collection[i].number
+                    result.description = result_text
+                    result.english = response.data.collection[i].english
+                    result.arabic = response.data.collection[i].arabic
+                    response.book = response.data.collection[i].book
+                    search_results.push(result)
+                }
+
+                self.setState({
+                    results: search_results
+                })
+            })
         }
 
     }
@@ -77,11 +106,16 @@ class VerseSearch extends Component {
     }
 
     selectVerse(e, { result }) {
-        this.props.dispatch(grabVerse(result.surah_id, result.verse_id));
+        if (this.state.type === "Quran") {
+            this.props.dispatch({type: "CHANGE_TYPE", payload: "Quran"})
+            this.props.dispatch(grabVerse(result.surah_id, result.verse_id));
+        } else if (this.state.type === "Hadith") {
+            this.props.dispatch({type: "CHANGE_TYPE", payload: "Hadith"})
+        }
+        
     }
 
     selectType(e, data) {
-        console.log(data.value)
         this.setState({
             type: data.value
         })

@@ -27,24 +27,44 @@ class QuranView extends Component {
 
 	render() {
 		//var verse_number = <div className="verse_circle">{this.convertEnglishToArabic(this.props.quran_verses.verses[0].verse_id.toString())}</div>
+		if (this.props.quran_verses.type === "Quran") {
+			return (
+				<div className="verse_container" id="verse_container">
+					<div id="verse_info">
+						<div className="verse_info verse_info_left">
+							{this.props.quran_verses.verses[0].surah_id}: {this.props.quran_verses.verses[0].verse_id}
+						</div>
+						<div className="verse_info verse_info_right">
+							Surah {this.props.quran_verses.verses[0].surah_name_latin}
+						</div>
+					</div>
+					<div className="verse" id="verse">
+						<p id="verse_arabic_ayah">{this.props.quran_verses.verses[0].arabic_ayah} <div className="verse_circle">{this.convertEnglishToArabic(this.props.quran_verses.verses[0].verse_id.toString())}</div></p>
+						<p id="verse_english_ayah">{this.props.quran_verses.verses[0].shakir_ayah} ({this.props.quran_verses.verses[0].verse_id})</p>
+					</div>
+					
+				</div>
+			);
+		} else if (this.props.quran_verses.type === "Hadith") {
+			return (
+				<div className="verse_container" id="verse_container">
+					<div id="verse_info">
+						<div className="verse_info verse_info_left">
+							{this.props.quran_verses.hadith.source}
+						</div>
+						<div className="verse_info verse_info_right">
+							Provided by A.L.I's Hadith Database
+						</div>
+					</div>
+					<div className="verse" id="verse">
+						<p id="verse_arabic_ayah">{this.props.quran_verses.hadith.arabic} </p>
+						<p id="verse_english_ayah">{this.props.quran_verses.hadith.english}</p>
+					</div>
+					
+				</div>
+			);
+		}
 
-		return (
-			<div className="verse_container" id="verse_container">
-				<div id="verse_info">
-					<div className="verse_info verse_info_left">
-						{this.props.quran_verses.verses[0].surah_id}: {this.props.quran_verses.verses[0].verse_id}
-					</div>
-					<div className="verse_info verse_info_right">
-						Surah {this.props.quran_verses.verses[0].surah_name_latin}
-					</div>
-				</div>
-				<div className="verse" id="verse">
-					<p id="verse_arabic_ayah">{this.props.quran_verses.verses[0].arabic_ayah} <div className="verse_circle">{this.convertEnglishToArabic(this.props.quran_verses.verses[0].verse_id.toString())}</div></p>
-					<p id="verse_english_ayah">{this.props.quran_verses.verses[0].shakir_ayah} ({this.props.quran_verses.verses[0].verse_id})</p>
-				</div>
-				
-			</div>
-		);
 	}
 }
 
