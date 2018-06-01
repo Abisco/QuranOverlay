@@ -16,7 +16,9 @@ export default function settingsReducer(state = {
     english_name_size: 14,
     show_arabic_name: true,
     arabic_name_colour: "#fff",
-    arabic_name_size: 14
+    arabic_name_size: 14,
+    quran_info_colour: "#fff",
+    quran_info_size: 22
       
 }, action) {
   switch(action.type) {
