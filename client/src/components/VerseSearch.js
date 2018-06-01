@@ -35,67 +35,68 @@ class VerseSearch extends Component {
     
 
     searchText(e, value) {
-        var self = this;
-        var search_input = value.value
-
-        if (this.state.type === "Quran") {
-            axios.get('/api/quran_verses?find_verse=' + search_input)
-            .then(function(response) {
-                var search_results = []
-                var result_text
+        if (value.value.length > 2) {
+            var self = this;
+            var search_input = value.value
     
-                for (var i = 0; i < response.data.verses.length; i++) {
-                    result_text = response.data.verses[i].shakir_ayah
+            if (this.state.type === "Quran") {
+                axios.get('/api/quran_verses?find_verse=' + search_input)
+                .then(function(response) {
+                    var search_results = []
+                    var result_text
+        
+                    for (var i = 0; i < response.data.verses.length; i++) {
+                        result_text = response.data.verses[i].shakir_ayah
+        
+                        if (response.data.verses[i].arabic_ayah.indexOf(search_input) !== -1) {
+                            result_text = response.data.verses[i].arabic_ayah
+                        }
     
-                    if (response.data.verses[i].arabic_ayah.indexOf(search_input) !== -1) {
-                        result_text = response.data.verses[i].arabic_ayah
+                        result_text = result_text.replace(search_input, "<div class='search_input_result'>" + search_input + "</div>")
+        
+                        var result = {}
+                        result.title = "Surah " + surahs_info[response.data.verses[i].surah_id].latin + ", Verse " + response.data.verses[i].verse_id.toString()
+                        result.price = response.data.verses[i].surah_id.toString() + ": " + response.data.verses[i].verse_id.toString()
+                        result.description = <div>{ReactHtmlParser(result_text)}</div>
+                        result.surah_id = response.data.verses[i].surah_id
+                        result.verse_id = response.data.verses[i].verse_id
+                        search_results.push(result)
                     }
-
-                    result_text = result_text.replace(search_input, "<div class='search_input_result'>" + search_input + "</div>")
-    
-                    var result = {}
-                    result.title = "Surah " + surahs_info[response.data.verses[i].surah_id].latin + ", Verse " + response.data.verses[i].verse_id.toString()
-                    result.price = response.data.verses[i].surah_id.toString() + ": " + response.data.verses[i].verse_id.toString()
-                    result.description = <div>{ReactHtmlParser(result_text)}</div>
-                    result.surah_id = response.data.verses[i].surah_id
-                    result.verse_id = response.data.verses[i].verse_id
-                    search_results.push(result)
-                }
-    
-                self.setState({
-                    results: search_results
+        
+                    self.setState({
+                        results: search_results
+                    })
                 })
-            })
-        } else {
-            axios.get('https://hadith.academyofislam.com/v1/narrations?q=' + search_input + '&page=0')
-            .then(function(response) {
-                var search_results = []
-                var result_text = response.data.collection[i].english
-
-                for (var i = 0; i < response.data.collection.length; i++) {
-                    result_text = response.data.collection[i].english
-                    if (response.data.collection[i].arabic.indexOf(search_input) !== -1) {
-                        result_text = response.data.collection[i].arabic
+            } else {
+                axios.get('https://hadith.academyofislam.com/v1/narrations?q=' + search_input + '&page=0')
+                .then(function(response) {
+                    var search_results = []
+                    var result_text = response.data.collection[i].english
+    
+                    for (var i = 0; i < response.data.collection.length; i++) {
+                        result_text = response.data.collection[i].english
+                        if (response.data.collection[i].arabic.indexOf(search_input) !== -1) {
+                            result_text = response.data.collection[i].arabic
+                        }
+                        
+                        result_text = result_text.replace(search_input, "<div class='search_input_result'>" + search_input + "</div>")
+    
+                        var result = {}
+                        result.title = response.data.collection[i].source
+                        result.price = response.data.collection[i].number
+                        result.description = <div>{ReactHtmlParser(result_text)}</div>
+                        result.english = response.data.collection[i].english
+                        result.arabic = response.data.collection[i].arabic
+                        response.book = response.data.collection[i].book
+                        search_results.push(result)
                     }
-                    
-                    result_text = result_text.replace(search_input, "<div class='search_input_result'>" + search_input + "</div>")
-
-                    var result = {}
-                    result.title = response.data.collection[i].source
-                    result.price = response.data.collection[i].number
-                    result.description = <div>{ReactHtmlParser(result_text)}</div>
-                    result.english = response.data.collection[i].english
-                    result.arabic = response.data.collection[i].arabic
-                    response.book = response.data.collection[i].book
-                    search_results.push(result)
-                }
-
-                self.setState({
-                    results: search_results
+    
+                    self.setState({
+                        results: search_results
+                    })
                 })
-            })
+            }
         }
-
     }
 
     focused() {
