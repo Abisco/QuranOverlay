@@ -1,6 +1,8 @@
 # The Quran Overlay Project
 The Quran Overlay project is a web platform for providing Quran Verses in a lower-third or full screen format quickly. This is used mostly for overlaying purposes, but can also be used for searching for verses quickly.
 
+Here's an example of its usage at the Jaffari Community Centre in Toronto: https://youtu.be/y6iurRnLY5Y?t=23m22s
+
 ## Usage
 There are a few different ways to utilize the platform: 
 
