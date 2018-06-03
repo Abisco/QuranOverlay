@@ -14,6 +14,13 @@ export default function quranVersesReducer(state = {
         };
     }
 
+    case "SET_HADITH" :{
+        return state = {
+            ...state,
+            hadith: action.payload
+        }
+    }
+
     case "CURRENT_SEARCH" :{
         return state = {
             ...state,
