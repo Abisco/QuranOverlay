@@ -135,7 +135,7 @@ class App extends Component {
         } else if (event.keyCode === 58 || event.keyCode === 186 || event.keyCode === 16) {
           //Colon, switch from surah to verse
           type = "VERSE"
-        } else if (event.keyCode === 32 || event.keyCode === 39) {
+        } else if ((event.keyCode === 32 || event.keyCode === 39) && self.props.quran_verses.type === "Quran") {
           //Space bar or Right arrow
           if (current_verse === "" || current_surah === "") {
             current_verse = self.props.quran_verses.verses[0].verse_id
@@ -156,7 +156,7 @@ class App extends Component {
             
             self.props.dispatch(grabVerse(current_surah, current_verse));
           }
-        } else if (event.keyCode === 37) {
+        } else if (event.keyCode === 37 && self.props.quran_verses.type === "Quran") {
           // Left arrow
           if (current_verse === "" || current_surah === "") {
             current_verse = self.props.quran_verses.verses[0].verse_id
@@ -174,7 +174,7 @@ class App extends Component {
             self.props.dispatch(grabVerse(current_surah, current_verse));
           }
           
-        } else if (event.keyCode === 8) {
+        } else if (event.keyCode === 8 ) {
           // Backspace
           type = "SURAH"
           current_verse = ""
