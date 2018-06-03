@@ -12,7 +12,9 @@ export default function quranVersesReducer(state = {
         return state = {
             ...state,
             verses: action.payload,
-            type: "Quran"
+            type: "Quran",
+            verse_search: null,
+            surah_search: null
         };
     }
 

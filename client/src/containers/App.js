@@ -137,10 +137,8 @@ class App extends Component {
           type = "VERSE"
         } else if ((event.keyCode === 32 || event.keyCode === 39) && self.props.quran_verses.type === "Quran") {
           //Space bar or Right arrow
-          if (current_verse === "" || current_surah === "") {
-            current_verse = self.props.quran_verses.verses[0].verse_id
-            current_surah = self.props.quran_verses.verses[0].surah_id
-          }
+          current_verse = self.props.quran_verses.verses[0].verse_id
+          current_surah = self.props.quran_verses.verses[0].surah_id
   
           if (parseInt(current_verse) !== self.props.quran_verses.quran_dictionary[114] || parseInt(current_surah) !== 114) {
             if (parseInt(current_verse) + 1 > self.props.quran_verses.quran_dictionary[current_surah]) {
@@ -158,10 +156,8 @@ class App extends Component {
           }
         } else if (event.keyCode === 37 && self.props.quran_verses.type === "Quran") {
           // Left arrow
-          if (current_verse === "" || current_surah === "") {
-            current_verse = self.props.quran_verses.verses[0].verse_id
-            current_surah = self.props.quran_verses.verses[0].surah_id
-          }
+          current_verse = self.props.quran_verses.verses[0].verse_id
+          current_surah = self.props.quran_verses.verses[0].surah_id
   
           if (parseInt(current_verse) !== 1 || parseInt(current_surah) !== 1) {
             if ((parseInt(current_verse) === 0 && parseInt(current_surah) !== 1) || (parseInt(current_verse) === 1 && parseInt(current_surah) === 9)) {
@@ -181,6 +177,11 @@ class App extends Component {
           current_surah = ""
           self.props.dispatch(currentSearch(current_surah, current_verse))
         } else if ((event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)) {
+          if (self.props.quran_verses.verses[0].verse_id.toString() === current_verse && self.props.quran_verses.verses[0].surah_id.toString() === current_surah) {
+            current_verse = ""
+            current_surah = ""
+          }
+
           if (type === "VERSE") {
             current_verse += String.fromCharCode(event.keyCode)
             self.props.dispatch(currentSearch(current_surah, current_verse))
