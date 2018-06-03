@@ -18,9 +18,12 @@
 
 .navbar_right_options {
     margin-right: 10px;
-    margin-left: auto;
+    margin-left: 10px;
     display: flex;
     padding: 10px;
+}
+
+.navbar_right_dropdown {
 }
 
 .navbar_settings {
