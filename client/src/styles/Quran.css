@@ -33,6 +33,7 @@
 .verse_info {
     position: absolute;
     max-width: 5vw;
+    line-height: 1;
 }
 
 .verse_info_left {
