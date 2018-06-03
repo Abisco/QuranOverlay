@@ -13,18 +13,26 @@ class VerseSearch extends Component {
         super(props);
 
         this.searchText = this.searchText.bind(this);
+        this.checkInput = this.checkInput.bind(this);
         this.selectVerse = this.selectVerse.bind(this);
         this.selectType = this.selectType.bind(this);
+        this.trackScrollingResults = this.trackScrollingResults.bind(this);
+        this.isNearBottom = this.isNearBottom.bind(this);
 
         this.state = {
             isLoading: false,
             results: [],
             value: '',
-            type: 'Quran'
+            type: 'Quran',
+            page: 1,
+            grabbing: false,
+            limit: false
         };
     }
 
     componentDidMount() {
+        var results = document.getElementsByClassName('results')[0]
+        results.addEventListener('scroll', this.trackScrollingResults)
     }
 
     //Taken from Stackoverflow
@@ -33,69 +41,109 @@ class VerseSearch extends Component {
         return str.replace(re, '<b>'+find+'</b>');
     }
     
+    trackScrollingResults() {
+        var results = document.getElementsByClassName('results')[0]
+        if (this.isNearBottom(results) && ! this.state.grabbing && ! this.state.limit) {
+            var search_input = document.getElementById('search_verse_input').value
+            this.searchText(search_input, this.state.page)
+        }
+    }
 
-    searchText(e, value) {
+    isNearBottom(el) {
+        if (el) {
+            return (el.scrollTop >= (el.scrollHeight * 0.75));
+        }
+    }
+
+    checkInput(e, value) {
+        this.setState({
+            results: [],
+            limit: false,
+            page: 1,
+            grabbing: true
+        })
+
         if (value.value.length > 2) {
-            var self = this;
-            var search_input = value.value
+            this.searchText(value.value, 1)
+        }
+    }
+
+    searchText(search_input, page) {
+        this.setState({
+            grabbing: true
+        })
+
+        var self = this;
+        var limit = false
+
+        if (this.state.type === "Quran") {
+            axios.get('/api/quran_verses?find_verse=' + search_input + '&page=' + page)
+            .then(function(response) {
+                var search_results = []
+                var result_text
+                if (response.data.verses.length < 20) {
+                    limit = true
+                }
+
+                for (var i = 0; i < response.data.verses.length; i++) {
+                    result_text = response.data.verses[i].shakir_ayah
     
-            if (this.state.type === "Quran") {
-                axios.get('/api/quran_verses?find_verse=' + search_input)
-                .then(function(response) {
-                    var search_results = []
-                    var result_text
-        
-                    for (var i = 0; i < response.data.verses.length; i++) {
-                        result_text = response.data.verses[i].shakir_ayah
-        
-                        if (response.data.verses[i].arabic_ayah.indexOf(search_input) !== -1) {
-                            result_text = response.data.verses[i].arabic_ayah
-                        }
-    
-                        result_text = result_text.replace(search_input, "<div class='search_input_result'>" + search_input + "</div>")
-        
-                        var result = {}
-                        result.title = "Surah " + surahs_info[response.data.verses[i].surah_id].latin + ", Verse " + response.data.verses[i].verse_id.toString()
-                        result.price = response.data.verses[i].surah_id.toString() + ": " + response.data.verses[i].verse_id.toString()
-                        result.description = <div>{ReactHtmlParser(result_text)}</div>
-                        result.surah_id = response.data.verses[i].surah_id
-                        result.verse_id = response.data.verses[i].verse_id
-                        search_results.push(result)
+                    if (response.data.verses[i].arabic_ayah.indexOf(search_input) !== -1) {
+                        result_text = response.data.verses[i].arabic_ayah
                     }
-        
-                    self.setState({
-                        results: search_results
-                    })
-                })
-            } else {
-                axios.get('https://hadith.academyofislam.com/v1/narrations?q=' + search_input + '&page=0')
-                .then(function(response) {
-                    var search_results = []
-                    var result_text = response.data.collection[i].english
     
-                    for (var i = 0; i < response.data.collection.length; i++) {
-                        result_text = response.data.collection[i].english
-                        if (response.data.collection[i].arabic.indexOf(search_input) !== -1) {
-                            result_text = response.data.collection[i].arabic
-                        }
+                    result_text = result_text.replace(search_input, "<div class='search_input_result'>" + search_input + "</div>")
+    
+                    var result = {}
+                    result.title = "Surah " + surahs_info[response.data.verses[i].surah_id].latin + ", Verse " + response.data.verses[i].verse_id.toString()
+                    result.price = response.data.verses[i].surah_id.toString() + ": " + response.data.verses[i].verse_id.toString()
+                    result.description = <div>{ReactHtmlParser(result_text)}</div>
+                    result.surah_id = response.data.verses[i].surah_id
+                    result.verse_id = response.data.verses[i].verse_id
+                    search_results.push(result)
+                }
+        
+                self.setState({
+                    results: self.state.results.concat(search_results),
+                    page: page + 1,
+                    grabbing: false,
+                    limit: limit
+                })
+            })
+        } else {
+            axios.get('https://hadith.academyofislam.com/v1/narrations?q=' + search_input + '&page=' + page)
+            .then(function(response) {
+                var search_results = []
+                var result_text = response.data.collection[i].english
+                if (response.data.collection.length < 20) {
+                    limit = true
+                }
+
+                for (var i = 0; i < response.data.collection.length; i++) {
+                    result_text = response.data.collection[i].english
+                    if (response.data.collection[i].arabic.indexOf(search_input) !== -1) {
+                        result_text = response.data.collection[i].arabic
+                    }
                         
-                        result_text = result_text.replace(search_input, "<div class='search_input_result'>" + search_input + "</div>")
+                    result_text = result_text.replace(search_input, "<div class='search_input_result'>" + search_input + "</div>")
     
-                        var result = {}
-                        result.title = response.data.collection[i].source
-                        result.price = response.data.collection[i].number
-                        result.description = <div>{ReactHtmlParser(result_text)}</div>
-                        result.english = response.data.collection[i].english
-                        result.arabic = response.data.collection[i].arabic
-                        response.book = response.data.collection[i].book
-                        search_results.push(result)
-                    }
+                    var result = {}
+                    result.title = response.data.collection[i].source
+                    result.price = response.data.collection[i].number
+                    result.description = <div>{ReactHtmlParser(result_text)}</div>
+                    result.english = response.data.collection[i].english
+                    result.arabic = response.data.collection[i].arabic
+                    response.book = response.data.collection[i].book
+                    search_results.push(result)
+                }
     
-                    self.setState({
-                        results: search_results
-                    })
+                self.setState({
+                    results: self.state.results.concat(search_results),
+                    page: page + 1,
+                    grabbing: false,
+                    limit: limit
                 })
-            }
+            })
         }
     }
 
@@ -128,7 +176,7 @@ class VerseSearch extends Component {
             <div className="search_bar">
                 <Search
                     loading={this.state.isLoading}
-                    onSearchChange={this.searchText}
+                    onSearchChange={this.checkInput}
                     results={this.state.results}
                     placeholder='Search for a Verse'
                     onFocus={this.focused.bind(this)} 
@@ -136,8 +184,7 @@ class VerseSearch extends Component {
                     id="search_verse_input"
                     className="search_verse_input"
                     minCharacters={3}
-                    onResultSelect={this.selectVerse}
-                />
+                    onResultSelect={this.selectVerse} />
                 <Dropdown selection defaultValue='Quran' onChange={this.selectType} options={[{text: 'Quran', value: 'Quran'}, {text: 'Hadiths', value: 'Hadiths'}]} className="search_verse_type"/>
             </div>
 

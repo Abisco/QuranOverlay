@@ -10,7 +10,7 @@ There are a few different ways to utilize the platform:
 The left and right arrow keys (and space bar) can be used to navigate the verses quickly. At the end of every Surah, verse 0 will be opened (Bismillah - except for Surah 1 and 9) upon navigating to the next verse. 
 
 ### Quick Verse Lookup
-To quickly look up a verse, you can type the Surah number anywhere on the screen, followed by a colon or semi colon, then the verse, followed by the enter button. It is good practice to start with the backspace button to clear the current search (in case of accidental keys pressed). 
+To quickly look up a verse, you can type the Surah number anywhere on the screen, followed by a colon or semi colon, then the verse, followed by the enter button. The results will be shown in the center of the Navbar. It is good practice to start with the backspace button to clear the current search (in case of accidental keys pressed). 
 
 Example: 36:1 typed in would bring up Surah Ya Seen verse 1. 
 
@@ -25,4 +25,11 @@ The settings area in the top right corner can be opened and closed by clicking o
 * Left Arrow: Display previous verse
 * Right Arrow or Spacebar: Display next verse
 * ?: Toggle the navbar
+* Number: Any number will begin a query search of a surah or verse.
 * Colon or Semi colon: Following entering a Surah number, the colon or semi colon key will switch the search to a verse look up
+* Shift + Q: Toggle Arabic
+* Shift + E: Toggle English
+* Alt + Q: Increase Arabic Size
+* Alt + W: Decrease Arabic Size
+* Alt + E: Increase English Size
+* Alt + R: Decrease Arabic Size
