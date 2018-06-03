@@ -111,28 +111,35 @@ class VerseSearch extends Component {
                 })
             })
         } else {
-            axios.get('https://hadith.academyofislam.com/v1/narrations?q=' + search_input + '&page=' + page)
+            axios.get('https://hadith.academyofislam.com/v1/narrations?q=' + search_input + '&page=' + (page - 1))
             .then(function(response) {
                 var search_results = []
-                var result_text = response.data.collection[i].english
-                if (response.data.collection.length < 20) {
+                var result_text
+                if (response.data.collection.length < 10) {
                     limit = true
                 }
 
                 for (var i = 0; i < response.data.collection.length; i++) {
+                    var title = response.data.collection[i].book + ", " + response.data.collection[i].number
+                    
                     result_text = response.data.collection[i].english
                     if (response.data.collection[i].arabic.indexOf(search_input) !== -1) {
                         result_text = response.data.collection[i].arabic
+                    }
+
+                    if (response.data.collection[i].source) {
+                        title = response.data.collection[i].source
                     }
                         
                     result_text = result_text.replace(search_input, "<div class='search_input_result'>" + search_input + "</div>")
     
                     var result = {}
-                    result.title = response.data.collection[i].source
+                    result.title = title
                     result.price = response.data.collection[i].number
                     result.description = <div>{ReactHtmlParser(result_text)}</div>
                     result.english = response.data.collection[i].english
                     result.arabic = response.data.collection[i].arabic
+                    result.source = title
                     response.book = response.data.collection[i].book
                     search_results.push(result)
                 }
@@ -161,6 +168,7 @@ class VerseSearch extends Component {
             this.props.dispatch(grabVerse(result.surah_id, result.verse_id));
         } else if (this.state.type === "Hadith") {
             this.props.dispatch({type: "CHANGE_TYPE", payload: "Hadith"})
+            this.props.dispatch({type: "SET_HADITH", payload: result})
         }
         
     }
@@ -185,7 +193,7 @@ class VerseSearch extends Component {
                     className="search_verse_input"
                     minCharacters={3}
                     onResultSelect={this.selectVerse} />
-                <Dropdown selection defaultValue='Quran' onChange={this.selectType} options={[{text: 'Quran', value: 'Quran'}, {text: 'Hadiths', value: 'Hadiths'}]} className="search_verse_type"/>
+                <Dropdown selection defaultValue='Quran' onChange={this.selectType} options={[{text: 'Quran', value: 'Quran'}, {text: 'Hadith', value: 'Hadith'}]} className="search_verse_type"/>
             </div>
 
         );
