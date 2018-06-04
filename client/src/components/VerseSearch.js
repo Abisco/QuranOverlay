@@ -111,7 +111,7 @@ class VerseSearch extends Component {
                 })
             })
         } else {
-            axios.get('https://hadith.academyofislam.com/v1/narrations?q=' + search_input + '&page=' + (page - 1))
+            axios.get('https://hadith.academyofislam.com/v1/narrations?q=' + search_input + '&page=' + page)
             .then(function(response) {
                 var search_results = []
                 var result_text
@@ -137,7 +137,7 @@ class VerseSearch extends Component {
 
                     title = title.replace('<span class="highlight">', "")
                     title = title.replace('</span>', "")
-                    
+
                     var result = {}
                     result.title = title
                     result.price = response.data.collection[i].number
