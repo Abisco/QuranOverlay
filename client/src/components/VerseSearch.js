@@ -132,7 +132,12 @@ class VerseSearch extends Component {
                     }
                         
                     result_text = result_text.replace(search_input, "<div class='search_input_result'>" + search_input + "</div>")
-    
+                    result_text = result_text.replace('<span class="highlight">', "")
+                    result_text = result_text.replace('</span>', "")
+
+                    title = title.replace('<span class="highlight">', "")
+                    title = title.replace('</span>', "")
+                    
                     var result = {}
                     result.title = title
                     result.price = response.data.collection[i].number
