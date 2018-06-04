@@ -9,6 +9,7 @@ export default function quranVersesReducer(state = {
 }, action) {
   switch(action.type) {
     case "SET_VERSES" :{
+        document.getElementById("verse_arabic_ayah").style.fontFamily = null;
         return state = {
             ...state,
             verses: action.payload,
@@ -34,6 +35,11 @@ export default function quranVersesReducer(state = {
     }
 
     case "CHANGE_TYPE" :{
+        if (action.payload === "Quran") {
+            document.getElementById("verse_arabic_ayah").style.fontFamily = null;
+        } else if (action.payload === "Hadith") {
+            document.getElementById("verse_arabic_ayah").style.fontFamily = "Scheherazade, serif";
+        }
         return state = {
             ...state,
             type: action.payload
