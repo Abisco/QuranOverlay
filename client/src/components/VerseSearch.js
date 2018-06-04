@@ -115,7 +115,7 @@ class VerseSearch extends Component {
             .then(function(response) {
                 var search_results = []
                 var result_text
-                if (response.data.collection.length < 10) {
+                if (response.data.collection.length < 20) {
                     limit = true
                 }
 
