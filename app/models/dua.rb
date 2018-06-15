@@ -1,0 +1,2 @@
+class Dua < ApplicationRecord
+end

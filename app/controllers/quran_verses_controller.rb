@@ -1,5 +1,4 @@
 class QuranVersesController < ApplicationController
-  
     # GET /quran_verses
     def index
         if params[:verse_number] && params[:surah_number]
@@ -18,7 +17,6 @@ class QuranVersesController < ApplicationController
 
             @json_response = {STATUS: 'SUCCESS', verses: @verses}
             render json: Oj.dump(@json_response, mode: :compat)
-        elsif params[:verse_range]
         end
     end
   end

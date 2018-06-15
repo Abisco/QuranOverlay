@@ -9,6 +9,15 @@ export function grabVerse(surah_number, verse_number) {
     }
 }
 
+export function grabDua(dua_name, line_number) {
+    return function(dispatch) {
+        axios.get('/api/duas?dua_name=' + dua_name + '&dua_line=' + line_number)
+        .then(function(response) {
+            dispatch({type: "SET_DUA", payload: response.data.line})
+        })
+    }
+}
+
 export function currentSearch(surah, verse) {
     return function(dispatch) {
         dispatch({type: "CURRENT_SEARCH", payload: {

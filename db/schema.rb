@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180526192923) do
+ActiveRecord::Schema.define(version: 20180614023115) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "duas", force: :cascade do |t|
+    t.string "dua_name_arabic"
+    t.integer "line_id"
+    t.text "arabic"
+    t.text "english_translation"
+  end
 
   create_table "quran_verses", force: :cascade do |t|
     t.datetime "created_at", null: false

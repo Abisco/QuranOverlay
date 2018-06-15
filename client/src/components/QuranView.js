@@ -64,6 +64,21 @@ class QuranView extends Component {
 					
 				</div>
 			);
+		} else if (this.props.quran_verses.type === "Dua") {
+			return (
+				<div className="verse_container" id="verse_container">
+					<div id="verse_info">
+						<div className="verse_info verse_info_right">
+							{this.props.quran_verses.dua_line.dua_name_arabic}
+						</div>
+					</div>
+					<div className="verse" id="verse">
+						<p id="verse_arabic_ayah">{this.props.quran_verses.dua_line.arabic} </p>
+						<p id="verse_english_ayah">{this.props.quran_verses.dua_line.english_translation} ({this.props.quran_verses.dua_line.line_id + 1})</p>
+					</div>
+					
+				</div>
+			);
 		}
 
 	}

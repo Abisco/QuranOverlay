@@ -34,6 +34,8 @@ gem 'figaro'
 gem 'awesome_print'
 # Use ap in rails console before querying for nicely formatted results
 
+gem 'nokogiri'
+
 # Used for faster json calls
 gem 'oj'
 # Speed up posgresql queries
