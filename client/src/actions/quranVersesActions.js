@@ -13,7 +13,12 @@ export function grabDua(dua_name, line_number) {
     return function(dispatch) {
         axios.get('/api/duas?dua_name=' + dua_name + '&dua_line=' + line_number)
         .then(function(response) {
-            dispatch({type: "SET_DUA", payload: response.data.line})
+            dispatch({type: "SET_DUA", 
+                payload: {
+                    dua_line: response.data.line,
+                    num_lines_dua: response.data.num_lines
+                }
+            })
         })
     }
 }

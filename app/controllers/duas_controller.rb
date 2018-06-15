@@ -9,8 +9,8 @@ class DuasController < ApplicationController
       render json: Oj.dump(@json_response, mode: :compat)
     elsif params.has_key?("dua_line")
       @line = Dua.where("line_id = ? AND dua_name_arabic ILIKE ?", params[:dua_line].to_i, params[:dua_name])
-
-      @json_response = {STATUS: 'SUCCESS', line: @line[0]}
+      @num_lines = Dua.where("dua_name_arabic ILIKE ?", params[:dua_name]).size
+      @json_response = {STATUS: 'SUCCESS', line: @line[0], num_lines: @num_lines}
       render json: Oj.dump(@json_response, mode: :compat)
     elsif params.has_key?("dua_list")
       @duas = Dua.all.distinct.pluck(:dua_name_arabic)

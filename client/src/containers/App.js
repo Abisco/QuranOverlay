@@ -155,7 +155,7 @@ class App extends Component {
               
               self.props.dispatch(grabVerse(current_surah, current_verse));
             }
-          } else if (self.props.quran_verses.type === "Dua") {
+          } else if (self.props.quran_verses.type === "Dua" && self.props.quran_verses.dua_line.line_id !== self.props.quran_verses.num_lines_dua) {
             self.props.dispatch(grabDua(self.props.quran_verses.dua_line.dua_name_arabic,  self.props.quran_verses.dua_line.line_id + 1))
           }
 
