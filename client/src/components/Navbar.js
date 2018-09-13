@@ -9,6 +9,7 @@ import VerseSearch from './VerseSearch';
 import { grabVerse, grabDua } from "../actions/quranVersesActions"
 
 import { surahs_info } from "../helpers/quran_info";
+import ShortcutsMenu from './ShortcutsMenu';
 
 class Navbar extends Component {
     constructor(props) {
@@ -125,19 +126,7 @@ class Navbar extends Component {
                             </Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
-                    <Dropdown item icon='keyboard' simple direction='left'>
-                        <Dropdown.Menu>
-                            <Dropdown.Item className="keyboard_item">
-                                <div>
-                                    BACKSPACE
-                                </div>
-                                <div>
-                                    Reset Request
-                                </div>
-                            </Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
-
+                    <ShortcutsMenu />
                     <SettingsMenu />
                 </div>
             </div>

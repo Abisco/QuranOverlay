@@ -1,3 +1,23 @@
+kbd {
+    padding:0.1em 0.6em;
+    border:1px solid #ccc;
+    font-size:11px;
+    font-family:Arial,Helvetica,sans-serif;
+    background-color:#f7f7f7;
+    color:#333;
+    -moz-box-shadow:0 1px 0px rgba(0, 0, 0, 0.2),0 0 0 2px #ffffff inset;
+    -webkit-box-shadow:0 1px 0px rgba(0, 0, 0, 0.2),0 0 0 2px #ffffff inset;
+    box-shadow:0 1px 0px rgba(0, 0, 0, 0.2),0 0 0 2px #ffffff inset;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    border-radius:3px;
+    display:inline-block;
+    margin:0 0.1em;
+    text-shadow:0 1px 0 #fff;
+    line-height:1.4;
+    white-space:nowrap;
+}
+
 .navbar {
     display: flex;
     position: fixed;
@@ -10,6 +30,23 @@
     box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
     min-height: 2.85714286em;
     z-index: 5;
+}
+
+.keyboard_item {
+    display: flex;
+    width: 100%;
+}
+
+.keyboard_left {
+    margin-left: 5px;
+    padding: 5px;
+    margin-right: auto;
+}
+
+.keyboard_right {
+    margin-right: 5px;
+    padding: 5px;
+    margin-left: auto;
 }
 
 .navbar_left_options {
@@ -90,6 +127,38 @@
 
 .settings_menu_font_dropdown {
     min-width: 10px !important;
+}
+
+.keyboard_menu {
+    position: absolute;
+    width: auto;
+    min-height: 20vh;
+    height: auto;
+    min-width: max-content;
+    font-size: 1em;
+    text-shadow: none;
+    text-align: left;
+    box-shadow: rgba(34, 36, 38, 0.15) 0px 2px 3px 0px;
+    z-index: 11;
+    will-change: transform, opacity;
+    outline: 0px;
+    margin: 0px;
+    padding: 5px;
+    background: rgb(255, 255, 255);
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(34, 36, 38, 0.15);
+    border-image: initial;
+    border-radius: 0.285714rem;
+    margin-left: -200px;
+    overflow-y: auto;
+    max-height: 60vh;
+}
+
+.keyboard_item {
+    display: flex;
+    padding: 5px;
+    margin: 5px;
 }
 
 .results {
