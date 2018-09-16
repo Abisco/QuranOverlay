@@ -8,6 +8,7 @@ import Navbar from "../components/Navbar";
 import { grabVerse, currentSearch, grabDua } from "../actions/quranVersesActions"
 
 import { surahs_info } from "../helpers/quran_info";
+import UpperSixth from '../components/UpperSixth';
 
 var Mousetrap = window.Mousetrap
 
@@ -132,10 +133,10 @@ class App extends Component {
             current_surah = ""
           }
           self.props.dispatch(currentSearch(current_surah, current_verse))
-        } else if (event.keyCode === 58 || event.keyCode === 186 || event.keyCode === 16) {
+        } else if (event.keyCode === 58 || event.keyCode === 186 || event.keyCode === 16 || event.keyCode === 188 || event.keyCode === 190) {
           //Colon, switch from surah to verse
           type = "VERSE"
-        } else if ((event.keyCode === 32 || event.keyCode === 39)) {
+        } else if ((event.keyCode === 32 || event.keyCode == 34 || event.keyCode === 39)) {
           //Space bar or Right arrow
           if (self.props.quran_verses.type === "Quran") {
             current_verse = self.props.quran_verses.verses[0].verse_id
@@ -159,7 +160,7 @@ class App extends Component {
             self.props.dispatch(grabDua(self.props.quran_verses.dua_line.dua_name_arabic,  self.props.quran_verses.dua_line.line_id + 1))
           }
 
-        } else if (event.keyCode === 37) {
+        } else if (event.keyCode === 37  || event.keyCode == 33) {
           // Left arrow
           if (self.props.quran_verses.type === "Quran") {
             current_verse = self.props.quran_verses.verses[0].verse_id
@@ -220,6 +221,7 @@ class App extends Component {
     return (
       <div className="App">
         <Navbar />
+        <UpperSixth />
         <div id="quran_view_container" className="quran_view_container">
           <QuranView />
         </div>

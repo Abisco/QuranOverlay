@@ -9,6 +9,7 @@ import "./styles/index.css";
 import "./styles/App.css";
 import "./styles/Quran.css";
 import "./styles/Navbar.css";
+import "./styles/UpperSixth.css";
 
 import store from "./store.js";
 
@@ -18,13 +19,11 @@ ReactDOM.render(
   <BrowserRouter>
     <Provider store={store}>
       <HttpsRedirect>
-        <div className="App">
           <div className="container main_app">
             <Switch>
               <Route path="/" component={App} />
             </Switch>
           </div>
-        </div>
       </HttpsRedirect>
     </Provider>
   </BrowserRouter>,

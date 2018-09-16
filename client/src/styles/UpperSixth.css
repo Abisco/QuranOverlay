@@ -1,0 +1,65 @@
+
+.upperSixth {
+    padding: 5% 5% 0 5%;
+    position: relative;
+    height: 66vh;
+    width: 100%;
+  }
+
+.top_upper {
+    height: 66%;
+    display: flex;
+}
+
+.bottom_upper {
+    height: 33%;
+    display: flex;
+    align-self: flex-end;
+}
+
+.bottom_upper_left {
+    margin-left: 5px;
+    margin-right: auto;
+    max-width: 45%;
+    min-width: 45%;
+    align-self: flex-end;
+}
+
+.bottom_upper_right {
+    margin-right: 5px;
+    margin-left: auto;
+    max-width: 45%;
+    min-width: 45%;
+    align-self: flex-end;
+    height: 100%;
+}
+
+.next_verse {
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.next_header {
+    width: 100%;
+}
+
+.no_next_verse {
+    width: 100%;
+    margin: auto;
+}
+
+.next_arabic {
+    width: 100%;
+    font-size: 20px;
+    margin-bottom: 3px;
+    line-height: normal;
+}
+
+.next_english {
+    width: 100%;
+    font-size: 20px;
+    line-height: normal;
+}

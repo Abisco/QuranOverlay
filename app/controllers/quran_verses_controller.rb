@@ -2,7 +2,7 @@ class QuranVersesController < ApplicationController
     # GET /quran_verses
     def index
         if params[:verse_number] && params[:surah_number]
-            @quran_verse = QuranVerse.where("verse_id = ? AND surah_id = ?", params[:verse_number].to_i, params[:surah_number].to_i)
+            @quran_verse = QuranVerse.where("verse_id >= ? AND verse_id <= ? AND surah_id = ?", params[:verse_number].to_i,  params[:verse_number].to_i + 1, params[:surah_number].to_i)
             
             @json_response = {STATUS: 'SUCCESS', verse: @quran_verse}
             render json: Oj.dump(@json_response, mode: :compat)
