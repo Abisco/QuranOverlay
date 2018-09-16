@@ -32,7 +32,7 @@ class ShortcutsMenu extends Component {
     render() {
         var keyboard_menu = <div />
         if (this.state.show_shortcuts) {
-            keyboard_menu =<div className="keyboard_menu">
+            keyboard_menu =<div className="keyboard_menu" onMouseEnter={this.showShortcuts} onMouseLeave={this.hideShortcuts}>
                                 <Header size='tiny' dividing>Keyboard Shortcuts</Header>
                                 <Header size='tiny'>Toggles</Header>
                                 <div className="keyboard_item">
@@ -62,7 +62,7 @@ class ShortcutsMenu extends Component {
                                 <Header size='tiny'>Verse Search</Header>
                                 <div className="keyboard_item">
                                     <div className="keyboard_left">
-                                        <kbd>114</kbd> + <kbd>:</kbd> + <kbd>1</kbd>
+                                        <kbd>114</kbd> + <kbd>:</kbd>/<kbd>.</kbd>/<kbd>,</kbd> + <kbd>1</kbd>
                                     </div>
                                     <div className="keyboard_right">
                                         Pull up Verse
@@ -114,7 +114,7 @@ class ShortcutsMenu extends Component {
 
         return (
             <div className="keyboard_settings" >
-                <Icon name='keyboard' className="navbar_settings_icon" onMouseEnter={this.showShortcuts} onMouseLeave={this.hideShortcuts}/>
+                <Icon name='keyboard' className="navbar_settings_icon" onMouseEnter={this.showShortcuts}/>
                 {keyboard_menu}
             </div>
         );
