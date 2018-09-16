@@ -29,19 +29,26 @@ class QuranView extends Component {
 	render() {
 		//var verse_number = <div className="verse_circle">{this.convertEnglishToArabic(this.props.quran_verses.verses[0].verse_id.toString())}</div>
 		if (this.props.quran_verses.type === "Quran") {
+			var index; 
+			if (this.props.quran_verses.verses.length === 3 || this.props.quran_verses.verses[0].verse_id > 1) {
+				index = 1;
+			} else if (this.props.quran_verses.verses[0].verse_id === 0 || this.props.quran_verses.verses[0].verse_id === 1) {
+				index = 0
+			}
+
 			return (
 				<div className="verse_container" id="verse_container">
 					<div id="verse_info">
 						<div className="verse_info verse_info_left">
-							{this.props.quran_verses.verses[0].surah_id}: {this.props.quran_verses.verses[0].verse_id}
+							{this.props.quran_verses.verses[index].surah_id}: {this.props.quran_verses.verses[index].verse_id}
 						</div>
 						<div className="verse_info verse_info_right">
-							Surah {this.props.quran_verses.verses[0].surah_name_latin}
+							Surah {this.props.quran_verses.verses[index].surah_name_latin}
 						</div>
 					</div>
 					<div className="verse" id="verse">
-						<p id="verse_arabic_ayah">{this.props.quran_verses.verses[0].arabic_ayah} <div className="verse_circle">{this.convertEnglishToArabic(this.props.quran_verses.verses[0].verse_id.toString())}</div></p>
-						<p id="verse_english_ayah">{this.props.quran_verses.verses[0].shakir_ayah} ({this.props.quran_verses.verses[0].verse_id})</p>
+						<p id="verse_arabic_ayah">{this.props.quran_verses.verses[index].arabic_ayah} <div className="verse_circle">{this.convertEnglishToArabic(this.props.quran_verses.verses[index].verse_id.toString())}</div></p>
+						<p id="verse_english_ayah">{this.props.quran_verses.verses[index].shakir_ayah} ({this.props.quran_verses.verses[index].verse_id})</p>
 					</div>
 					
 				</div>
