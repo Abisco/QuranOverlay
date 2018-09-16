@@ -121,7 +121,7 @@ class Navbar extends Component {
                         <Dropdown.Menu>
                             <Dropdown.Item className="keyboard_item">
                                 <div>
-                                    About us will be here
+                                    A website used to quickly pull up verses, hadith, or duas for overlays or full screen presentations. 
                                 </div>
                             </Dropdown.Item>
                         </Dropdown.Menu>
