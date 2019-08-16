@@ -7,9 +7,9 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.1.1'
+gem 'rails'
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 0.18'
+gem 'pg'
 # Use Puma as the app server
 gem 'puma'
 gem 'devise_token_auth'
@@ -19,7 +19,7 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-linkedin-oauth2'
 gem 'omniauth-facebook'
 
-gem 'omniauth-oauth2', '~> 1.3.1'
+gem 'omniauth-oauth2'
 
 gem 'geocoder'
 gem 'geokit-rails'
