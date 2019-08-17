@@ -51,6 +51,9 @@ class PlaylistItem extends Component {
                     <div className="playlist_number">
                         {this.props.item.surah_id}:{this.props.item.verse_id}
                     </div>
+                    <div className="playlist_surah_name">
+                        {this.props.item.surah_name_latin}
+                    </div>
                     <div className="playlist_remove">
                         <Icon color='red' name='close' onClick={this.removeFromPlaylist}/>
                     </div>
