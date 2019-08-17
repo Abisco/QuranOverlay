@@ -9,6 +9,56 @@
 .top_upper {
     height: 66%;
     display: flex;
+    padding: 2% 0;
+}
+
+.playlist_segment {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.playlist_actions {
+    margin-bottom: 5px;
+    margin-top: auto;
+}
+
+.playlist_item {
+    margin: 5px 0;
+    padding: 5px;
+    display: flex;
+}
+
+.playlist_text {
+    width: 100%;
+}
+
+.playlist_item_info {
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.playlist_number {
+    color: #21ba45;
+}
+
+.playlist_remove {
+    margin: auto 0;
+}
+
+.playlist_item:hover {
+    background-color: #dbe3b8;
+    cursor: pointer;
+}
+
+.playlist_item.active {
+    background-color: #97e3df;
+}
+
+.playlist_list {
+    height: 70%;
+    overflow-y: auto;
 }
 
 .bottom_upper {
@@ -17,7 +67,7 @@
     align-self: flex-end;
 }
 
-.bottom_upper_left {
+.bottom_upper_left, .playlist_container {
     margin-left: 5px;
     margin-right: auto;
     max-width: 45%;
@@ -26,7 +76,7 @@
     height: 100%;
 }
 
-.bottom_upper_right {
+.bottom_upper_right, .quicksettings_container {
     margin-right: 5px;
     margin-left: auto;
     max-width: 45%;

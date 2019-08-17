@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { Header, Segment } from "semantic-ui-react";
+import { Header, Segment, Icon } from "semantic-ui-react";
+import Playlist from './Playlist';
 
 class UpperSixth extends Component {
 	constructor(props) {
@@ -47,7 +48,7 @@ class UpperSixth extends Component {
     }
     
     nextVerse() {
-        if (this.props.quran_verses.type === "Quran" && (this.props.quran_verses.verses.length !== 2 || this.props.quran_verses.verses[0].verse_id == 0 || this.props.quran_verses.verses[0].verse_id == 1)) {
+        if (this.props.quran_verses.type === "Quran" && (this.props.quran_verses.verses.length !== 2 || this.props.quran_verses.verses[0].verse_id === 0 || this.props.quran_verses.verses[0].verse_id === 1)) {
             var index;
 
             if (this.props.quran_verses.verses.length === 3 || this.props.quran_verses.verses[0].verse_id > 1) {
@@ -79,8 +80,13 @@ class UpperSixth extends Component {
             <div className="upperSixth">
                 <div className="top_upper">
                     <div className="playlist_container">
+                        <Playlist />
                     </div>
                     <div className="quicksettings_container">
+                        <Segment className="playlist_segment">
+                            <Header size='tiny'> <Icon name='list' /> Quick Settings:</Header>
+                            <Header as='tiny' icon='wrench' textAlign='center' content='Coming Soon!' style={{margin: "auto"}}/>  
+                        </Segment>
                     </div>
                 </div>
                 <div className="bottom_upper">
