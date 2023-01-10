@@ -85,7 +85,7 @@ class UpperSixth extends Component {
                     <div className="quicksettings_container">
                         <Segment className="playlist_segment">
                             <Header size='tiny'> <Icon name='list' /> Quick Settings:</Header>
-                            <Header as='tiny' icon='wrench' textAlign='center' content='Coming Soon...' style={{margin: "auto"}}/>  
+                            <Header as='tiny' icon='wrench' textAlign='center' content='Coming Soon' style={{margin: "auto"}}/>  
                         </Segment>
                     </div>
                 </div>
